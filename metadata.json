@@ -1,0 +1,9 @@
+
+{
+  "name": "Pocket Emergency Helper",
+  "description": "Pocket Emergency Helper by Arfan Malik (Ar-Ra Solutions Innovation) is a premium offline-first safety toolkit. Access professional first-aid guides, pilgrims-specific SOS tools, localized weather alerts, and essential utilities like a multi-mode screen flashlight, bill splitter, unit converter, and emergency checklists—completely offline and privacy-focused.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

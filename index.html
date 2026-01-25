@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pocket Emergency Helper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ladies: {
+                            pink: '#FF69B4',
+                            purple: '#4B0082',
+                            bg: '#FAD0C4',
+                            bgTo: '#FFD1FF'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: contain;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Ladies Theme (Pastel/Pink) */
+        [data-theme="pink"] body {
+            background: linear-gradient(135deg, #FAD0C4 0%, #FFD1FF 100%);
+            color: #4B0082;
+        }
+        [data-theme="pink"] .bg-white { background-color: rgba(255, 255, 255, 0.7) !important; backdrop-filter: blur(8px); }
+        [data-theme="pink"] .bg-slate-900 { background-color: #4B0082 !important; }
+
+        /* Gold Theme (Premium) */
+        [data-theme="gold"] body {
+            background-color: #0c0c0c;
+            color: #d4af37;
+        }
+        [data-theme="gold"] .bg-white { background-color: #1a1a1a !important; border-color: #d4af37 !important; color: #d4af37; }
+        [data-theme="gold"] .bg-slate-900 { background-color: #d4af37 !important; color: #000; }
+        [data-theme="gold"] .text-slate-900 { color: #d4af37 !important; }
+
+        /* Cyber Theme (Premium) */
+        [data-theme="cyber"] body {
+            background-color: #000;
+            color: #0ff;
+        }
+        [data-theme="cyber"] .bg-white { background-color: #111 !important; border-color: #f0f !important; color: #0ff; box-shadow: 0 0 10px #f0f; }
+        [data-theme="cyber"] .bg-red-600 { background-color: #f0f !important; box-shadow: 0 0 20px #f0f; }
+
+        .dark body { background-color: #121212; color: #ffffff; }
+        .dark .bg-white { background-color: #1e1e1e !important; border-color: #333333 !important; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

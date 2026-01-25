@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Pocket Helper</string>
+    <string name="title_activity_main">Pocket Helper</string>
+    <string name="package_name">com.arfan.pockethelper</string>
+    <string name="custom_url_scheme">com.arfan.pockethelper</string>
+</resources>
