@@ -1,0 +1,85 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - main [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - heading "Quick Tools" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Reliable utilities available offline
+      - generic [ref=e9]:
+        - button "Ritual Counter Manual tally tracking" [active] [ref=e10] [cursor=pointer]:
+          - img [ref=e12]
+          - generic [ref=e15]:
+            - generic [ref=e16]: Ritual Counter
+            - text: Manual tally tracking
+        - button "Open Flashlight" [ref=e17] [cursor=pointer]:
+          - img [ref=e19]
+          - generic [ref=e21]: Flashlight
+        - button "Open Compass" [ref=e22] [cursor=pointer]:
+          - img [ref=e24]
+          - generic [ref=e27]: Compass
+        - button "Open SOS Center" [ref=e28] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: SOS Center
+        - button "Open Whistle" [ref=e34] [cursor=pointer]:
+          - img [ref=e36]
+          - generic [ref=e40]: Whistle
+        - button "Open Magnifier" [ref=e41] [cursor=pointer]:
+          - img [ref=e43]
+          - generic [ref=e46]: Magnifier
+          - img [ref=e47]
+        - button "Open Bubble Level" [ref=e50] [cursor=pointer]:
+          - img [ref=e52]
+          - generic [ref=e57]: Bubble Level
+        - button "Open Mirror" [ref=e58] [cursor=pointer]:
+          - img [ref=e60]
+          - generic [ref=e63]: Mirror
+        - button "Open Signal Meter" [ref=e64] [cursor=pointer]:
+          - img [ref=e66]
+          - generic [ref=e67]: Signal Meter
+        - button "Converter Units & currency rates" [ref=e68] [cursor=pointer]:
+          - img [ref=e70]
+          - generic [ref=e73]:
+            - generic [ref=e74]: Converter
+            - text: Units & currency rates
+        - button "Bill Splitter Calculate tips and splits" [ref=e75] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]:
+            - generic [ref=e80]: Bill Splitter
+            - text: Calculate tips and splits
+      - generic [ref=e81]:
+        - generic [ref=e82]:
+          - heading "Ritual Counter" [level=2] [ref=e83]
+          - button [ref=e84] [cursor=pointer]:
+            - img [ref=e85]
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - img [ref=e90]
+            - generic [ref=e93]:
+              - generic [ref=e94]: "0"
+              - generic [ref=e95]: / 7 Tally
+          - button "+ 1 CIRCUIT" [ref=e96] [cursor=pointer]
+          - button "Reset Counter" [ref=e97] [cursor=pointer]
+  - navigation [ref=e98]:
+    - link "Home" [ref=e99] [cursor=pointer]:
+      - /url: "#/"
+      - img [ref=e100]
+      - generic [ref=e103]: Home
+    - link "Guides" [ref=e104] [cursor=pointer]:
+      - /url: "#/guides"
+      - img [ref=e105]
+      - generic [ref=e107]: Guides
+    - link "Tools" [ref=e108] [cursor=pointer]:
+      - /url: "#/tools"
+      - img [ref=e109]
+      - generic [ref=e111]: Tools
+    - link "POI Map" [ref=e112] [cursor=pointer]:
+      - /url: "#/maps"
+      - img [ref=e113]
+      - generic [ref=e115]: POI Map
+    - link "Badges" [ref=e116] [cursor=pointer]:
+      - /url: "#/badges"
+      - img [ref=e117]
+      - generic [ref=e123]: Badges
+```

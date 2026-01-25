@@ -1,0 +1,107 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - main [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - heading "Pocket Helper" [level=1] [ref=e10]
+            - button [ref=e11] [cursor=pointer]:
+              - img [ref=e12]
+          - generic [ref=e15]:
+            - paragraph [ref=e17]: Online • Offline Safety & Tools
+            - button [ref=e18] [cursor=pointer]:
+              - img [ref=e19]
+        - generic [ref=e24]:
+          - generic [ref=e25]:
+            - img [ref=e26]
+            - generic [ref=e28]: "1"
+          - generic [ref=e29]:
+            - img [ref=e30]
+            - generic [ref=e32]: "0"
+      - generic [ref=e33]:
+        - button "Send SOS" [ref=e34] [cursor=pointer]:
+          - img [ref=e35]
+          - generic [ref=e37]: Send SOS
+        - button "Pilgrim SOS" [ref=e38] [cursor=pointer]:
+          - img [ref=e39]
+          - generic [ref=e41]: Pilgrim SOS
+      - generic [ref=e42]:
+        - heading "Active Alerts" [level=2] [ref=e44]
+        - generic [ref=e45]:
+          - alert [ref=e46]:
+            - img [ref=e48]
+            - generic [ref=e52]:
+              - heading "Sandstorm Advisory" [level=4] [ref=e53]
+              - paragraph [ref=e54]: High winds expected. Visibility below 10m. Stay indoors and seal windows.
+              - generic [ref=e56]: high Severity
+          - alert [ref=e57]:
+            - img [ref=e59]
+            - generic [ref=e65]:
+              - heading "Extreme Heatwave" [level=4] [ref=e66]
+              - paragraph [ref=e67]: Temperatures exceeding 50°C. Avoid direct sun. Drink 500ml water every hour.
+              - generic [ref=e69]: extreme Severity
+      - generic [ref=e70]:
+        - heading "Checklists" [level=2] [ref=e72]
+        - link "Safety Manual Essential Offline Readiness Hajj Kit Car Essentials Open Recommended Templates" [ref=e73] [cursor=pointer]:
+          - /url: "#/checklists"
+          - generic [ref=e74]:
+            - img [ref=e76]
+            - generic [ref=e79]:
+              - heading "Safety Manual" [level=3] [ref=e80]
+              - paragraph [ref=e81]: Essential Offline Readiness
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - img [ref=e84]
+              - generic [ref=e86]: Hajj Kit
+            - generic [ref=e87]:
+              - img [ref=e88]
+              - generic [ref=e92]: Car Essentials
+          - generic [ref=e93]:
+            - generic [ref=e94]: Open Recommended Templates
+            - img [ref=e95]
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - img [ref=e100]
+          - generic [ref=e102]: Daily Tip
+        - paragraph [ref=e103]: "\"Keep a flashlight by your bed.\""
+        - generic [ref=e104]:
+          - link "View All" [ref=e105] [cursor=pointer]:
+            - /url: "#/tips"
+          - generic [ref=e106]:
+            - img [ref=e107]
+            - generic [ref=e109]: Tips for You
+        - img [ref=e111]
+      - generic [ref=e113]:
+        - link "Safety Guides" [ref=e114] [cursor=pointer]:
+          - /url: "#/guides"
+          - img [ref=e116]
+          - generic [ref=e118]: Safety Guides
+        - link "Quick Tools" [ref=e119] [cursor=pointer]:
+          - /url: "#/tools"
+          - img [ref=e121]
+          - generic [ref=e123]: Quick Tools
+  - navigation [ref=e124]:
+    - link "Home" [ref=e125] [cursor=pointer]:
+      - /url: "#/"
+      - img [ref=e126]
+      - generic [ref=e129]: Home
+    - link "Guides" [ref=e130] [cursor=pointer]:
+      - /url: "#/guides"
+      - img [ref=e131]
+      - generic [ref=e133]: Guides
+    - link "Tools" [ref=e134] [cursor=pointer]:
+      - /url: "#/tools"
+      - img [ref=e135]
+      - generic [ref=e137]: Tools
+    - link "POI Map" [ref=e138] [cursor=pointer]:
+      - /url: "#/maps"
+      - img [ref=e139]
+      - generic [ref=e141]: POI Map
+    - link "Badges" [ref=e142] [cursor=pointer]:
+      - /url: "#/badges"
+      - img [ref=e143]
+      - generic [ref=e149]: Badges
+```
