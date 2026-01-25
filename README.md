@@ -87,7 +87,7 @@ For the full policy, visit: [Privacy Policy](./privacy-policy/index.md)
 
 - **Lead Developer:** Arfan Malik
 - **Organization:** Ar-Ra Solutions Innovation
-- **Contact:** [innovation@ar-ra.solutions](mailto:innovation@ar-ra.solutions)
+- **Contact:** [innovation@ar-ra.solutions](mailto:arfan.software.engineer@gmail.com)
 
 ---
 
