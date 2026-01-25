@@ -27,7 +27,7 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
   const tips = stats.customTips || [];
   const todayTip = tips[new Date().getDate() % tips.length] || tips[0];
   const isRtl = lang === 'ar' || lang === 'ur';
-  const [coords, setCoords] = useState<{lat: number, lng: number} | null>(null);
+  const [coords, setCoords] = useState<{ lat: number, lng: number } | null>(null);
   const [showAbout, setShowAbout] = useState(false);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
@@ -58,8 +58,8 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
 
   const handleQuickSos = (type: 'general' | 'hajj' = 'general') => {
     if (stats.emergencyContact) {
-      const baseMsg = type === 'hajj' 
-        ? getTranslation('hajjSosMsg', lang) 
+      const baseMsg = type === 'hajj'
+        ? getTranslation('hajjSosMsg', lang)
         : "SOS! HELP NEEDED.";
       const message = `${baseMsg} My GPS: https://www.google.com/maps?q=${coords?.lat || 0},${coords?.lng || 0}`;
       window.location.href = `sms:${stats.emergencyContact}?body=${encodeURIComponent(message)}`;
@@ -70,10 +70,10 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
   };
 
   const WeatherAlertCard = ({ alert }: { alert: WeatherAlert }) => {
-    const icon = alert.type === 'sandstorm' ? <Wind size={24} /> : 
-                 alert.type === 'heatwave' ? <Sun size={24} /> : 
-                 alert.type === 'flood' ? <CloudLightning size={24} /> : <Thermometer size={24} />;
-    
+    const icon = alert.type === 'sandstorm' ? <Wind size={24} /> :
+      alert.type === 'heatwave' ? <Sun size={24} /> :
+        alert.type === 'flood' ? <CloudLightning size={24} /> : <Thermometer size={24} />;
+
     const severityColors = {
       moderate: 'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-200',
       high: 'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-200',
@@ -88,19 +88,26 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
     };
 
     return (
-      <div className={`p-5 rounded-[2rem] border-2 flex items-start gap-4 shadow-sm animate-in fade-in slide-in-from-top duration-700 ${severityColors[alert.severity]}`} role="alert">
+      <div className={`p-5 rounded-[2rem] border-2 flex items-start gap-4 shadow-sm animate-in fade-in slide-in-from-top duration-700 relative overflow-hidden group ${severityColors[alert.severity]}`} role="alert">
         <div className={`shrink-0 p-3 bg-white/50 dark:bg-black/20 rounded-2xl shadow-inner ${typeIconColor[alert.type]}`}>
           {icon}
         </div>
-        <div className="text-left">
-           <h4 className="text-[11px] font-black uppercase tracking-widest mb-1">{alert.title[lang]}</h4>
-           <p className="text-[13px] font-bold leading-tight opacity-90">{alert.advisory[lang]}</p>
-           <div className="mt-2 flex items-center gap-2">
-             <span className="text-[8px] font-black uppercase px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10">
-               {alert.severity} Severity
-             </span>
-           </div>
+        <div className="text-left relative z-10">
+          <div className="flex items-center gap-2 mb-1">
+            <h4 className="text-[11px] font-black uppercase tracking-widest">{alert.title[lang]}</h4>
+            <div className="flex items-center gap-1 bg-red-600 text-white text-[7px] font-black px-1.5 py-0.5 rounded-full animate-pulse">
+              <div className="w-1 h-1 bg-white rounded-full" /> LIVE
+            </div>
+          </div>
+          <p className="text-[13px] font-bold leading-tight opacity-90">{alert.advisory[lang]}</p>
+          <div className="mt-2 flex items-center justify-between">
+            <span className="text-[8px] font-black uppercase px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10">
+              {alert.severity} Severity
+            </span>
+            <span className="text-[8px] font-black uppercase text-slate-400">Updated 2m ago</span>
+          </div>
         </div>
+        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 pointer-events-none" />
       </div>
     );
   };
@@ -131,8 +138,8 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
           </div>
           <div className="flex gap-2">
             <div className="px-3 py-1 rounded-lg flex items-center gap-2 bg-orange-100 text-orange-600 shadow-sm">
-               <Flame size={14} fill="currentColor" />
-               <span className="font-black text-xs">{stats.currentStreak}</span>
+              <Flame size={14} fill="currentColor" />
+              <span className="font-black text-xs">{stats.currentStreak}</span>
             </div>
             <div className={`px-3 py-1 rounded-lg flex items-center gap-2 shadow-lg ${stats.isPremium ? 'bg-yellow-500 text-black' : 'bg-red-600 text-white'}`}>
               <Zap size={14} fill="currentColor" />
@@ -144,14 +151,14 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
 
       {/* SOS Section */}
       <section className="bg-slate-900 rounded-[2rem] p-6 shadow-2xl border border-slate-800 space-y-3">
-        <button 
+        <button
           onClick={() => handleQuickSos('general')}
           className="w-full bg-red-600 text-white py-5 rounded-2xl flex items-center justify-center gap-4 shadow-xl active:scale-[0.98] transition-all"
         >
           <MessageSquare size={24} />
           <span className="font-black text-lg tracking-tighter uppercase">{getTranslation('sendSos', lang)}</span>
         </button>
-        <button 
+        <button
           onClick={() => handleQuickSos('hajj')}
           className="w-full bg-emerald-600 text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-lg active:scale-[0.98] transition-all border border-emerald-500/30"
         >
@@ -163,7 +170,7 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
       {/* WEATHER ALERTS SECTION */}
       {WEATHER_ALERTS.length > 0 && (
         <section className="space-y-3">
-           <div className="flex items-center justify-between px-2">
+          <div className="flex items-center justify-between px-2">
             <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Active Alerts</h2>
           </div>
           <div className="space-y-3">
@@ -181,70 +188,70 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
         </div>
         {stats.checklists.length > 0 ? (
           <Link to="/checklists" className="block bg-white dark:bg-[#1e1e1e] p-6 rounded-[2.5rem] border-2 border-slate-100 dark:border-slate-800 shadow-xl active:scale-[0.98] transition-all group overflow-hidden relative">
-             <div className="flex justify-between items-start mb-4 relative z-10">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-2xl flex items-center justify-center shadow-inner">
-                    <CheckCircle2 size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-black text-base uppercase tracking-tight text-slate-800 dark:text-slate-200">{stats.checklists[0].title}</h3>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Ongoing Preparedness</p>
-                  </div>
+            <div className="flex justify-between items-start mb-4 relative z-10">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-2xl flex items-center justify-center shadow-inner">
+                  <CheckCircle2 size={24} />
                 </div>
-                <div className="text-right">
-                  <span className="text-xl font-black text-slate-900 dark:text-white leading-none block">
-                    {Math.round((stats.checklists[0].items.filter(i=>i.completed).length / stats.checklists[0].items.length) * 100)}%
-                  </span>
-                  <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Complete</span>
+                <div>
+                  <h3 className="font-black text-base uppercase tracking-tight text-slate-800 dark:text-slate-200">{stats.checklists[0].title}</h3>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Ongoing Preparedness</p>
                 </div>
-             </div>
-             <div className="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mb-2 relative z-10">
-                <div 
-                  className="h-full bg-green-500 transition-all duration-1000 ease-out" 
-                  style={{ width: `${(stats.checklists[0].items.filter(i=>i.completed).length / stats.checklists[0].items.length) * 100}%` }}
-                />
-             </div>
-             <div className="mt-4 flex items-center justify-between text-[10px] font-black uppercase text-slate-600 dark:text-slate-400 group-hover:text-red-500 transition-colors relative z-10">
-                <span>Resume Checklist</span>
-                <div className="flex items-center gap-1">
-                  {getTranslation('viewAll', lang)} <ChevronRight size={14} className={isRtl ? 'rotate-180' : ''} />
-                </div>
-             </div>
-             <div className="absolute -bottom-4 -right-4 opacity-[0.03] dark:opacity-[0.07] pointer-events-none transform rotate-12">
-               <ListChecks size={120} />
-             </div>
+              </div>
+              <div className="text-right">
+                <span className="text-xl font-black text-slate-900 dark:text-white leading-none block">
+                  {Math.round((stats.checklists[0].items.filter(i => i.completed).length / stats.checklists[0].items.length) * 100)}%
+                </span>
+                <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Complete</span>
+              </div>
+            </div>
+            <div className="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mb-2 relative z-10">
+              <div
+                className="h-full bg-green-500 transition-all duration-1000 ease-out"
+                style={{ width: `${(stats.checklists[0].items.filter(i => i.completed).length / stats.checklists[0].items.length) * 100}%` }}
+              />
+            </div>
+            <div className="mt-4 flex items-center justify-between text-[10px] font-black uppercase text-slate-600 dark:text-slate-400 group-hover:text-red-500 transition-colors relative z-10">
+              <span>Resume Checklist</span>
+              <div className="flex items-center gap-1">
+                {getTranslation('viewAll', lang)} <ChevronRight size={14} className={isRtl ? 'rotate-180' : ''} />
+              </div>
+            </div>
+            <div className="absolute -bottom-4 -right-4 opacity-[0.03] dark:opacity-[0.07] pointer-events-none transform rotate-12">
+              <ListChecks size={120} />
+            </div>
           </Link>
         ) : (
-          <Link 
-            to="/checklists" 
+          <Link
+            to="/checklists"
             className="w-full p-8 bg-gradient-to-br from-white to-slate-50 dark:from-[#1e1e1e] dark:to-[#181818] border-2 border-slate-100 dark:border-slate-800 rounded-[2.5rem] flex flex-col shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all active:scale-[0.98] group relative overflow-hidden"
           >
             <div className="flex items-center gap-4 mb-6 relative z-10">
-               <div className="w-14 h-14 bg-red-600 text-white rounded-2xl flex items-center justify-center shadow-xl group-hover:rotate-6 transition-transform">
-                 <ListChecks size={32} />
-               </div>
-               <div>
-                 <h3 className="font-black text-lg uppercase tracking-tight text-slate-900 dark:text-white">{getTranslation('manualTitle', lang)}</h3>
-                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Essential Offline Readiness</p>
-               </div>
+              <div className="w-14 h-14 bg-red-600 text-white rounded-2xl flex items-center justify-center shadow-xl group-hover:rotate-6 transition-transform">
+                <ListChecks size={32} />
+              </div>
+              <div>
+                <h3 className="font-black text-lg uppercase tracking-tight text-slate-900 dark:text-white">{getTranslation('manualTitle', lang)}</h3>
+                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Essential Offline Readiness</p>
+              </div>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-3 mb-2 relative z-10">
-               <div className="p-3 bg-slate-100/50 dark:bg-slate-800/50 rounded-2xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-700/50">
-                  <MapIcon size={14} className="text-red-500" />
-                  <span className="text-[9px] font-black uppercase text-slate-600 dark:text-slate-400">Hajj Kit</span>
-               </div>
-               <div className="p-3 bg-slate-100/50 dark:bg-slate-800/50 rounded-2xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-700/50">
-                  <Car size={14} className="text-blue-500" />
-                  <span className="text-[9px] font-black uppercase text-slate-600 dark:text-slate-400">Car Essentials</span>
-               </div>
+              <div className="p-3 bg-slate-100/50 dark:bg-slate-800/50 rounded-2xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-700/50">
+                <MapIcon size={14} className="text-red-500" />
+                <span className="text-[9px] font-black uppercase text-slate-600 dark:text-slate-400">Hajj Kit</span>
+              </div>
+              <div className="p-3 bg-slate-100/50 dark:bg-slate-800/50 rounded-2xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-700/50">
+                <Car size={14} className="text-blue-500" />
+                <span className="text-[9px] font-black uppercase text-slate-600 dark:text-slate-400">Car Essentials</span>
+              </div>
             </div>
 
             <div className="mt-4 flex items-center justify-between text-[10px] font-black uppercase text-red-600 tracking-widest relative z-10">
-               <span>Open Recommended Templates</span>
-               <ArrowUpRight size={16} />
+              <span>Open Recommended Templates</span>
+              <ArrowUpRight size={16} />
             </div>
-            
+
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-red-600/5 rounded-full blur-3xl pointer-events-none" />
           </Link>
         )}
@@ -260,8 +267,8 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
           "{todayTip?.text[lang]}"
         </p>
         <div className="flex items-center justify-between">
-           <Link 
-            to="/tips" 
+          <Link
+            to="/tips"
             className="inline-flex items-center text-[10px] font-black bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-200 px-6 py-3 rounded-2xl uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all shadow-sm"
           >
             {getTranslation('viewAll', lang)}
@@ -272,7 +279,7 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
           </div>
         </div>
         <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-           <Zap size={80} fill="currentColor" />
+          <Zap size={80} fill="currentColor" />
         </div>
       </section>
 
@@ -301,97 +308,97 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
             </button>
             <h2 className="text-2xl font-black mb-1 uppercase text-slate-900 dark:text-white text-center tracking-tighter">{getTranslation('appName', lang)}</h2>
             <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest mb-8">Production Release v1.3.0</p>
-            
+
             <div className="space-y-8">
-               {/* Language Section */}
-               <section className="space-y-4">
-                 <div className="flex items-center gap-2 px-1">
-                   <Globe size={16} className="text-blue-500" />
-                   <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Language Preferences</h3>
-                 </div>
-                 <div className="grid grid-cols-2 gap-2">
-                   {LANGUAGES.map(l => (
-                     <button 
-                       key={l.id} 
-                       onClick={() => setLanguage(l.id)} 
-                       className={`p-3 rounded-2xl font-black text-[10px] uppercase border transition-all flex items-center justify-between ${stats.language === l.id ? 'bg-blue-600 text-white border-blue-600 shadow-lg' : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-400'}`}
-                     >
-                       {l.label}
-                       {stats.language === l.id && <Check size={12} />}
-                     </button>
-                   ))}
-                 </div>
-               </section>
+              {/* Language Section */}
+              <section className="space-y-4">
+                <div className="flex items-center gap-2 px-1">
+                  <Globe size={16} className="text-blue-500" />
+                  <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Language Preferences</h3>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {LANGUAGES.map(l => (
+                    <button
+                      key={l.id}
+                      onClick={() => setLanguage(l.id)}
+                      className={`p-3 rounded-2xl font-black text-[10px] uppercase border transition-all flex items-center justify-between ${stats.language === l.id ? 'bg-blue-600 text-white border-blue-600 shadow-lg' : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-400'}`}
+                    >
+                      {l.label}
+                      {stats.language === l.id && <Check size={12} />}
+                    </button>
+                  ))}
+                </div>
+              </section>
 
-               {/* Theme Section */}
-               <section className="space-y-4">
-                 <div className="flex items-center gap-2 px-1">
-                   <Palette size={16} className="text-red-500" />
-                   <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400">{getTranslation('theme', lang)}</h3>
-                 </div>
-                 <div className="grid grid-cols-3 gap-2">
-                   {THEMES.map(t => (
-                     <button 
-                       key={t.id} 
-                       onClick={() => updateStats({ theme: t.id })}
-                       className={`flex flex-col items-center gap-2 p-3 rounded-2xl border transition-all ${stats.theme === t.id ? 'border-red-600 bg-red-50 dark:bg-red-900/10 shadow-inner' : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900'}`}
-                     >
-                       <div className={`w-10 h-10 rounded-full border-2 ${t.color}`} />
-                       <span className={`text-[9px] font-black uppercase ${stats.theme === t.id ? 'text-red-600' : 'text-slate-400'}`}>{t.label}</span>
-                     </button>
-                   ))}
-                 </div>
-               </section>
+              {/* Theme Section */}
+              <section className="space-y-4">
+                <div className="flex items-center gap-2 px-1">
+                  <Palette size={16} className="text-red-500" />
+                  <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400">{getTranslation('theme', lang)}</h3>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  {THEMES.map(t => (
+                    <button
+                      key={t.id}
+                      onClick={() => updateStats({ theme: t.id })}
+                      className={`flex flex-col items-center gap-2 p-3 rounded-2xl border transition-all ${stats.theme === t.id ? 'border-red-600 bg-red-50 dark:bg-red-900/10 shadow-inner' : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900'}`}
+                    >
+                      <div className={`w-10 h-10 rounded-full border-2 ${t.color}`} />
+                      <span className={`text-[9px] font-black uppercase ${stats.theme === t.id ? 'text-red-600' : 'text-slate-400'}`}>{t.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </section>
 
-               {/* Premium Status */}
-               <section className="bg-slate-50 dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                 <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-2xl ${stats.isPremium ? 'bg-yellow-100 text-yellow-600' : 'bg-slate-200 text-slate-400'}`}>
-                      <Crown size={20} />
-                    </div>
-                    <div>
-                      <h4 className="font-black text-xs uppercase tracking-tight">{stats.isPremium ? 'Premium Active' : 'Basic Member'}</h4>
-                      <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">{stats.isPremium ? 'Full Offline Access Unlocked' : 'Limited features'}</p>
-                    </div>
-                 </div>
-                 <button 
-                   onClick={() => updateStats({ isPremium: !stats.isPremium })} 
-                   className={`px-4 py-2 rounded-xl text-[8px] font-black uppercase tracking-widest transition-all ${stats.isPremium ? 'bg-slate-900 text-white' : 'bg-yellow-500 text-black shadow-lg shadow-yellow-200/50'}`}
-                 >
-                   {stats.isPremium ? 'Downgrade' : 'Unlock All'}
-                 </button>
-               </section>
-
-               {/* Manual & Dev Info */}
-               <div className="space-y-3">
-                  <Link to="/guidelines" onClick={() => setShowAbout(false)} className="flex items-center justify-between p-5 bg-white dark:bg-[#1e1e1e] border border-slate-100 dark:border-slate-800 rounded-3xl group shadow-sm">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-600 rounded-2xl"><Book size={20} /></div>
-                      <span className="text-xs font-black uppercase tracking-widest">{getTranslation('manualTitle', lang)}</span>
-                    </div>
-                    <ChevronRight size={18} className={`text-slate-400 ${isRtl ? 'rotate-180' : ''}`} />
-                  </Link>
-
-                  <div className="p-8 bg-slate-900 text-white rounded-[2.5rem] space-y-4 shadow-xl relative overflow-hidden group border border-slate-800">
-                     <div className="flex items-center gap-3 relative z-10">
-                        <div className="p-3 bg-white/10 rounded-2xl shadow-inner"><User size={20} className="text-red-500" /></div>
-                        <div>
-                          <h4 className="text-[10px] font-black uppercase tracking-widest text-white/50">{getTranslation('devInfo', lang)}</h4>
-                          <p className="font-black text-sm tracking-tight text-white">{getTranslation('devName', lang)}</p>
-                        </div>
-                     </div>
-                     <div className="relative z-10 space-y-1">
-                        <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-white/50">Organization</h4>
-                        <p className="font-black text-xs uppercase text-red-500 tracking-tight leading-none">{getTranslation('orgName', lang)}</p>
-                     </div>
-                     <p className="text-[10px] text-white/40 font-bold leading-relaxed uppercase opacity-70 relative z-10">
-                       Engineered for high-reliability in critical offline environments. Optimized for Hajj, travel, and emergencies.
-                     </p>
-                     <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform">
-                        <Landmark size={80} />
-                     </div>
+              {/* Premium Status */}
+              <section className="bg-slate-50 dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className={`p-3 rounded-2xl ${stats.isPremium ? 'bg-yellow-100 text-yellow-600' : 'bg-slate-200 text-slate-400'}`}>
+                    <Crown size={20} />
                   </div>
-               </div>
+                  <div>
+                    <h4 className="font-black text-xs uppercase tracking-tight">{stats.isPremium ? 'Premium Active' : 'Basic Member'}</h4>
+                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">{stats.isPremium ? 'Full Offline Access Unlocked' : 'Limited features'}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => updateStats({ isPremium: !stats.isPremium })}
+                  className={`px-4 py-2 rounded-xl text-[8px] font-black uppercase tracking-widest transition-all ${stats.isPremium ? 'bg-slate-900 text-white' : 'bg-yellow-500 text-black shadow-lg shadow-yellow-200/50'}`}
+                >
+                  {stats.isPremium ? 'Downgrade' : 'Unlock All'}
+                </button>
+              </section>
+
+              {/* Manual & Dev Info */}
+              <div className="space-y-3">
+                <Link to="/guidelines" onClick={() => setShowAbout(false)} className="flex items-center justify-between p-5 bg-white dark:bg-[#1e1e1e] border border-slate-100 dark:border-slate-800 rounded-3xl group shadow-sm">
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-600 rounded-2xl"><Book size={20} /></div>
+                    <span className="text-xs font-black uppercase tracking-widest">{getTranslation('manualTitle', lang)}</span>
+                  </div>
+                  <ChevronRight size={18} className={`text-slate-400 ${isRtl ? 'rotate-180' : ''}`} />
+                </Link>
+
+                <div className="p-8 bg-slate-900 text-white rounded-[2.5rem] space-y-4 shadow-xl relative overflow-hidden group border border-slate-800">
+                  <div className="flex items-center gap-3 relative z-10">
+                    <div className="p-3 bg-white/10 rounded-2xl shadow-inner"><User size={20} className="text-red-500" /></div>
+                    <div>
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-white/50">{getTranslation('devInfo', lang)}</h4>
+                      <p className="font-black text-sm tracking-tight text-white">{getTranslation('devName', lang)}</p>
+                    </div>
+                  </div>
+                  <div className="relative z-10 space-y-1">
+                    <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-white/50">Organization</h4>
+                    <p className="font-black text-xs uppercase text-red-500 tracking-tight leading-none">{getTranslation('orgName', lang)}</p>
+                  </div>
+                  <p className="text-[10px] text-white/40 font-bold leading-relaxed uppercase opacity-70 relative z-10">
+                    Engineered for high-reliability in critical offline environments. Optimized for Hajj, travel, and emergencies.
+                  </p>
+                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform">
+                    <Landmark size={80} />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
