@@ -307,7 +307,7 @@ const Home: React.FC<HomeProps> = ({ stats, updateStats, setLanguage, isSyncing,
               <X size={24} />
             </button>
             <h2 className="text-2xl font-black mb-1 uppercase text-slate-900 dark:text-white text-center tracking-tighter">{getTranslation('appName', lang)}</h2>
-            <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest mb-8">Production Release v1.3.0</p>
+            <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest mb-8">Official Launch v1.0.0</p>
 
             <div className="space-y-8">
               {/* Language Section */}
